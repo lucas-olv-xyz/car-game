@@ -32,7 +32,7 @@ SCORE = 0
 #setando fontes
 font = pygame.font.SysFont("Verdana", 60)
 font_small = pygame.font.SysFont("Verdana", 20)
-game_over = font.render("Game Over", True, BLACK)
+game_over = font.render("Game Over", True, WHITE)
 
 background = pygame.image.load("AnimatedStreet.png")
 
@@ -161,7 +161,7 @@ while True:
           pygame.mixer.music.stop()
           time.sleep(0.5)
           
-          DISPLAYSURF.fill(RED)
+          DISPLAYSURF.fill(BLACK)
           DISPLAYSURF.blit(game_over, (30,250))
           
           pygame.display.update()
