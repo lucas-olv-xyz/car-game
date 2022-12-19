@@ -13,6 +13,9 @@ pygame.mixer.music.play(-1, 0.0)
 FPS = 60
 FramePerSec = pygame.time.Clock()
 
+#setando o background
+
+
 #definindo algumas cores
 BLUE = (0,0,255)
 RED = (255,0,0)
@@ -37,6 +40,7 @@ background = pygame.image.load("AnimatedStreet.png")
 DISPLAYSURF = pygame.display.set_mode((400,600))
 DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Game")
+
 
 class Enemy(pygame.sprite.Sprite):
       def __init__(self):
@@ -77,9 +81,45 @@ class Player(pygame.sprite.Sprite):
       def draw(self, surface):
           surface.blit(self.image, self.rect)
      
+class Background():
+      def __init__(self):
+            self.bgimage = pygame.image.load('AnimatedStreet.png')
+            self.rectBGimg = self.bgimage.get_rect()
+            
+            self.bgY1 = self.rectBGimg.height
+            self.bgX1 = 0
+            
+            self.bgY2 = 0
+            self.bgX2 = 0
+            
+            self.moving_speed = 5
+            
+      # def update(self):
+      #       self.bgY2 -= self.moving_speed
+      #       self.bgY1 -= self.moving_speed
+      #       if self.bgY2 <= -self.rectBGimg.height:
+      #             self.bgY2 = self.rectBGimg.height
+      #       if self.bgY1 <= -self.rectBGimg.height:
+      #             self.bgY1 = self.rectBGimg.height
+         
+      def update(self):
+            self.bgY2 += self.moving_speed
+            self.bgY1 += self.moving_speed
+            if self.bgY2 >= self.rectBGimg.height:
+                  self.bgY2 = -self.rectBGimg.height
+            if self.bgY1 >= self.rectBGimg.height:
+                  self.bgY1 = -self.rectBGimg.height           
+                  
+                  
+      def render(self):
+         DISPLAYSURF.blit(self.bgimage, (self.bgX1, self.bgY1))
+         DISPLAYSURF.blit(self.bgimage, (self.bgX2, self.bgY2))
+
 #setando as sprites          
 P1 = Player()
 E1 = Enemy()
+
+back_ground = Background()
 
 #criando grupos de sprites
 enemies = pygame.sprite.Group()
@@ -102,8 +142,11 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+            
+    back_ground.update()
+    back_ground.render()
                     
-    DISPLAYSURF.blit(background, (0,0))
+    #DISPLAYSURF.blit(background, (0,0))
     scores = font_small.render(str(SCORE), True, BLACK)
     DISPLAYSURF.blit(scores, (10,10))
     
@@ -127,6 +170,6 @@ while True:
           time.sleep(2)
           pygame.quit()
           sys.exit()
-    
+          
     pygame.display.update()
     FramePerSec.tick(FPS)
