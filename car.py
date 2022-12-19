@@ -147,7 +147,7 @@ while True:
     back_ground.render()
                     
     #DISPLAYSURF.blit(background, (0,0))
-    scores = font_small.render(str(SCORE), True, BLACK)
+    scores = font_small.render(str(SCORE), True, WHITE)
     DISPLAYSURF.blit(scores, (10,10))
     
     #movimentando e redesenhando as sprites
