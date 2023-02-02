@@ -46,7 +46,7 @@ class Enemy(pygame.sprite.Sprite):
       def __init__(self):
           super().__init__()
           self.image =  pygame.image.load("Enemy.png")
-          self.rect = pygame.Rect(0,0,50,50)
+          self.rect = pygame.Rect(0,0,44,44)
           self.rect.center=(random.randint(40,SCREEN_WIDTH-40),0)
           
       def move(self):
@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
       def __init__(self):
         super().__init__()
         self.image = pygame.image.load("Player.png")
-        self.rect = self.image.get_rect()
+        self.rect = pygame.Rect(0,0,44,44)
         self.rect.center = (160,520)
         
       def move(self):
@@ -92,7 +92,7 @@ class Background():
             self.bgY2 = 0
             self.bgX2 = 0
             
-            self.moving_speed = 5
+            self.moving_speed = SPEED
             
       # def update(self):
       #       self.bgY2 -= self.moving_speed
@@ -103,6 +103,7 @@ class Background():
       #             self.bgY1 = self.rectBGimg.height
          
       def update(self):
+            self.moving_speed = SPEED * 0.5
             self.bgY2 += self.moving_speed
             self.bgY1 += self.moving_speed
             if self.bgY2 >= self.rectBGimg.height:
