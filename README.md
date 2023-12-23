@@ -8,4 +8,4 @@ O jogador pode mover o personagem para a esquerda e para a direita. Quando o jog
 
 Quando ocorre uma colisão, o jogo termina e é exibido a mensagem "Game Over".
 
-O jogador pode reiniciar o jogo ao clicar no botão de reinicialização.
+:D

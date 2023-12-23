@@ -7,7 +7,7 @@ import random, time
 pygame.init()
 
 # Carregando e reproduzindo a música de fundo
-pygame.mixer.music.load('background.wav')
+pygame.mixer.music.load('sounds/background.wav')
 pygame.mixer.music.play(-1, 0.0)
 
 # Configuração do FPS
@@ -32,7 +32,7 @@ font = pygame.font.SysFont("Verdana", 60)
 font_small = pygame.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, WHITE)
 
-background = pygame.image.load("AnimatedStreet.png")
+background = pygame.image.load("assets/AnimatedStreet.png")
 
 # Criação da superfície de exibição com dimensões 400x600 pixels
 DISPLAYSURF = pygame.display.set_mode((400, 600))
@@ -49,7 +49,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
 
         # Carregamento da imagem do inimigo
-        self.image = pygame.image.load("Enemy.png")
+        self.image = pygame.image.load("assets/Enemy.png")
 
         # Criação de um retângulo para representar o inimigo
         self.rect = pygame.Rect(0, 0, 44, 44)
@@ -78,7 +78,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Carregamento da imagem do jogador
-        self.image = pygame.image.load("Player.png")
+        self.image = pygame.image.load("assets/Player.png")
 
         # Criação de um retângulo para representar o jogador
         self.rect = pygame.Rect(0, 0, 44, 44)
@@ -110,7 +110,7 @@ class Player(pygame.sprite.Sprite):
 class Background():
     def __init__(self):
         # Carregamento da imagem de fundo
-        self.bgimage = pygame.image.load('AnimatedStreet.png')
+        self.bgimage = pygame.image.load('assets/AnimatedStreet.png')
 
         # Criação de um retângulo para a imagem de fundo
         self.rectBGimg = self.bgimage.get_rect()
@@ -188,7 +188,7 @@ while True:
     
     # Verificação de colisão entre o jogador e o inimigo
     if pygame.sprite.spritecollideany(P1, enemies):
-        pygame.mixer.Sound('crash.wav').play()
+        pygame.mixer.Sound('sounds/crash.wav').play()
         pygame.mixer.music.stop()
         time.sleep(0.5)
         
