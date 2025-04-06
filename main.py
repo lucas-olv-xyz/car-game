@@ -72,6 +72,27 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.top = 0
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
+class Power(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        # Carregamento da imagem do power-up
+        self.image = pygame.image.load("assets/Player.png")
+
+        # Criação de um retângulo para representar o power-up
+        self.rect = pygame.Rect(0, 0, 44, 44)
+    def move(self):
+        global SCORE
+
+        # Movimentação do power-up para baixo
+        self.rect.move_ip(0, SPEED)
+
+        # Verificação se o power-up atingiu a parte inferior da tela
+        if self.rect.bottom > 600:
+            # Reposicionamento do power-up no topo da tela
+            self.rect.top = 0
+            self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
+
 # Definição da classe Player que herda de pygame.sprite.Sprite
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -146,6 +167,7 @@ class Background():
 # Criação das instâncias das sprites
 P1 = Player()  # Jogador
 E1 = Enemy()  # Inimigo
+PW = Power()  # Power-up    
 
 # Criação da instância do fundo
 back_ground = Background()
@@ -156,6 +178,7 @@ enemies.add(E1)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(P1)
 all_sprites.add(E1)
+all_sprites.add(PW)
 
 # Adição de um novo evento do usuário
 INC_SPEED = pygame.USEREVENT + 1
@@ -185,6 +208,8 @@ while True:
     for entity in all_sprites:
         DISPLAYSURF.blit(entity.image, entity.rect)
         entity.move()
+    
+    # Verificação de colisão entre o jogador e o power-up
     
     # Verificação de colisão entre o jogador e o inimigo
     if pygame.sprite.spritecollideany(P1, enemies):
